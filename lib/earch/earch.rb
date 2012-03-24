@@ -1,15 +1,17 @@
-class Earch
+module Earch
+  class Earch
 
-  def create
+    def create
+
+    end
+
+    def drop
+
+    end
+
+    def search
+
+    end
 
   end
-
-  def drop
-
-  end
-
-  def search
-
-  end
-
 end

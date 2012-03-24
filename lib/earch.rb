@@ -1,8 +1,9 @@
 require "earch/version"
 
 module Earch
-  # Your code goes here...
+  autoload :Earch, 'earch/earch'
+
   def init(server, port)
-    Earch.new(server, port)
+    return Earch.new(server, port)
   end
 end
