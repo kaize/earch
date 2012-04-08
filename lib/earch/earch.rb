@@ -1,15 +1,15 @@
 module Earch
   class Earch
+    attr_reader :adapter
 
     def initialize(server, port, transport)
       @adapter = Adapter.init(server, port, transport)
     end
 
     def create(index, doctype, mapping = nil)
+      put_index(index)
       if !doctype.to_s.empty? && mapping
         put_mapping(index, doctype, mapping)
-      else
-        put_index(index)
       end
     end
 
@@ -29,7 +29,6 @@ module Earch
     end
 
     def search
-      #TODO
 
     end
 

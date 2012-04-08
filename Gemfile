@@ -4,6 +4,7 @@ source "http://rubygems.org"
 gemspec
 
 group :development, :test do
+  gem "active_support"
   gem "turn"
   gem "minitest"
 end

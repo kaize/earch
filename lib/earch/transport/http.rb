@@ -4,7 +4,6 @@ require 'json'
 module Earch
   module Transport
     class HTTP
-      include Support
 
       def initialize(host, port)
         @uri = URI('')
@@ -31,7 +30,7 @@ module Earch
       end
 
       def request(type, path, body = nil)
-        request_type = constantize("Net::HTTP::#{type.capitalize}")
+        request_type = "Net::HTTP::#{type.capitalize}".constantize
 
         request = request_type.new(path)
 
