@@ -28,6 +28,12 @@ module Earch
       response = @adapter.delete(uri)
     end
 
+    def get_mapping(index, doctype)
+      uri = build_path(index, doctype, "_mapping")
+      response = @adapter.get(uri)
+      response[:body]
+    end
+
     def search
 
     end
