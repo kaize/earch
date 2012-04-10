@@ -33,7 +33,8 @@ module Earch
       end
 
       def add_item(object)
-        response = @adapter.put()
+        h = item_hash_from_object object
+        response = @connector.put_item(index_name, document_name, h.to_json)
       end
 
       def delete_item()
@@ -43,10 +44,15 @@ module Earch
         @connector = value
       end
 
-      #private
       def build_hash(&blk)
         QueryBuilder.build(&blk)
       end
+
+      private
+
+        def item_hash_from_object(o, mapping)
+          mapping.each
+        end
 
     end
   end

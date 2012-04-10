@@ -22,7 +22,8 @@ module Earch
           :options => options
       }
       map_options[:nested] = self.class.build(&blk) if block_given?
-      @mapping.add_field name, map_options
+      field = Mapping::Field.new name, map_options
+      @mapping.add_field field
     end
 
   end

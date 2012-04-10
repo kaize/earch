@@ -1,18 +1,21 @@
 module Earch
   class Mapping
+
+    autoload :Field, "earch/mapping/field"
+
     def initialize
       @fields = {}
     end
 
-    def add_field(name, options)
-      @fields[name] = options
+    def add_field(field)
+      @fields[field.name] = field
     end
 
     def to_hash
       result = {}
-      @fields.each do |key, map_options|
-        result[key] = map_options[:options]
-        result[key].merge! map_options[:nested].to_hash if map_options[:nested]
+      @fields.each do |key, field|
+        result[key] = field.options
+        result[key].merge! field.nested.to_hash if field.nested?
       end
       {:properties => result}.to_hash
     end
