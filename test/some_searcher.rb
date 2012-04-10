@@ -8,7 +8,7 @@ class SomeSearcher < Earch::SearcherBase
 
   mapping do
     field :id, :type => :integer
-    field :message, :type => :string
+    field :message, :type => :string, :index => :not_analyzed
   end
 
 end

@@ -28,6 +28,11 @@ module Earch
       response = @adapter.put(uri, item)
     end
 
+    def post_search(index, doctype, query)
+      uri = build_path(index, doctype, "_search")
+      response = @adapter.post(uri, query)
+    end
+
     def drop(index)
       uri = build_path(index)
       response = @adapter.delete(uri)
@@ -39,8 +44,9 @@ module Earch
       response[:body]
     end
 
-    def search
-
+    def destroy_index(index)
+      uri = build_path(index)
+      response = @adapter.delete(uri)
     end
 
     def build_path(*args)

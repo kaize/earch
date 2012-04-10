@@ -9,6 +9,8 @@ class SearcherTest < MiniTest::Unit::TestCase
         #:id => {:type => :integer}
       #}}
     #}.to_json)
+    earch = Earch.init("localhost", 9200)
+    earch.destroy_index SomeSearcher.index_name
 
     SomeSearcher.create_document
     SomeSearcher.put_mapping
@@ -48,14 +50,19 @@ class SearcherTest < MiniTest::Unit::TestCase
     assert true
   end
 
-  #def test_search_term
-  #  model = SomeModel.new
-  #  SomeSearcher.add_item(model)
-  #
-  #  item = SomeSearcher.get_item model.id
-  #
-  #  assert item, model
-  #end
+  def test_search_term
+    model = SomeModel.new
+    SomeSearcher.add_item(model)
+    sleep 1
+
+    items = SomeSearcher.search do
+      filter do
+        term :message, model.message
+      end
+    end
+
+    assert_equal model, items.first
+  end
 
   def hash_val_keys_to_sym(h1)
     r = {}

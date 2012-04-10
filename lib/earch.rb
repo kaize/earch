@@ -12,6 +12,7 @@ module Earch
   autoload :SearcherBase, 'earch/searcher_base'
   autoload :QueryBuilder, 'earch/query_builder'
   autoload :Builders, 'earch/builders'
+  autoload :Response, 'earch/response'
 
   def self.init(server, port, transport = nil)
     transport ||= :http

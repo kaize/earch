@@ -11,8 +11,9 @@ module Earch
         @index_name
       end
 
-      def model(value)
-        @model = value
+      def model(value = nil)
+        @model = value if value
+        @model
       end
 
       def mapping(&block)
@@ -30,6 +31,9 @@ module Earch
 
       def search(&blk)
         hash = build_hash(&blk)
+        r = @connector.post_search(index_name, document_name, hash.to_json)
+
+        response = Response::Search.new r, model
       end
 
       def add_item(object)
