@@ -38,7 +38,7 @@ class SearcherTest < MiniTest::Unit::TestCase
     earch = Earch.init("localhost", 9200)
     true_mapping = earch.get_mapping(SomeSearcher.index_name, SomeSearcher.document_name)
 
-    assert_equal mapping, hash_val_kays_to_sym(true_mapping['some'])
+    assert_equal mapping, hash_val_keys_to_sym(true_mapping['some'])
   end
 
   def test_query_result
@@ -46,11 +46,11 @@ class SearcherTest < MiniTest::Unit::TestCase
 
   end
 
-  def hash_val_kays_to_sym(h1)
+  def hash_val_keys_to_sym(h1)
     r = {}
     h1.each do |k,v|
       if v.kind_of? Hash
-         r[k.to_sym] = hash_val_kays_to_sym(h1[k])
+         r[k.to_sym] = hash_val_keys_to_sym(h1[k])
       else
         r[k.to_sym] = v.to_sym
       end
