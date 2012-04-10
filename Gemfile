@@ -7,5 +7,6 @@ group :development, :test do
   gem "active_support"
   gem "turn"
   gem "minitest"
+  gem "tconsole"
 end
 
