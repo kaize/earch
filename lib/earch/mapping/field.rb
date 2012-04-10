@@ -22,6 +22,10 @@ module Earch
       @options[:nested] != nil
     end
 
+    def extract_method
+      @options[:extract_method]
+    end
+
   end
 end
 

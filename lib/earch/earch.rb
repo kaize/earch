@@ -23,6 +23,11 @@ module Earch
       response = @adapter.put(uri, mapping)
     end
 
+    def put_item(index, doctype, id, item)
+      uri = build_path(index, doctype, id)
+      response = @adapter.put(uri, item)
+    end
+
     def drop(index)
       uri = build_path(index)
       response = @adapter.delete(uri)

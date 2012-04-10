@@ -33,8 +33,9 @@ module Earch
       end
 
       def add_item(object)
-        h = item_hash_from_object object
-        response = @connector.put_item(index_name, document_name, h.to_json)
+        h = item_hash_from_object object, mapping
+        id = h['_id'] ||  h[:id]
+        response = @connector.put_item(index_name, document_name, id, h.to_json)
       end
 
       def delete_item()
@@ -50,8 +51,17 @@ module Earch
 
       private
 
-        def item_hash_from_object(o, mapping)
-          mapping.each
+        def item_hash_from_object(o, map)
+          res = {}
+          map.fields.each do |k,field|
+            val = o.send field.extract_method
+            if field.nested?
+              res[field.name] = item_hash_from_object(o, field.nested)
+            else
+              res[field.name] = val
+            end
+          end
+          res
         end
 
     end

@@ -41,10 +41,21 @@ class SearcherTest < MiniTest::Unit::TestCase
     assert_equal mapping, hash_val_keys_to_sym(true_mapping['some'])
   end
 
-  def test_query_result
+  def test_add_item
     model = SomeModel.new
 
+    SomeSearcher.add_item(model)
+    assert true
   end
+
+  #def test_search_term
+  #  model = SomeModel.new
+  #  SomeSearcher.add_item(model)
+  #
+  #  item = SomeSearcher.get_item model.id
+  #
+  #  assert item, model
+  #end
 
   def hash_val_keys_to_sym(h1)
     r = {}

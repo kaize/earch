@@ -3,6 +3,8 @@ module Earch
 
     autoload :Field, "earch/mapping/field"
 
+    attr_reader :fields
+
     def initialize
       @fields = {}
     end
@@ -17,11 +19,12 @@ module Earch
         result[key] = field.options
         result[key].merge! field.nested.to_hash if field.nested?
       end
-      {:properties => result}.to_hash
+      {:properties => result}
     end
 
     def to_json
       to_hash.to_json
     end
+
   end
 end
